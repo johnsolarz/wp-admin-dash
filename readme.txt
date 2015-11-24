@@ -8,11 +8,11 @@ Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Custom WordPress admin and dashboard elements.
+Custom WordPress admin and dashboard components.
 
 == Description ==
 
-WP Admin Dash registers custom WordPress post types, taxonomies, login screen, dashboard widgets, shortcodes and editor formats for use on Now Now client websites.
+WP Admin Dash registers custom WordPress post types, taxonomies, login screen, dashboard widgets, shortcodes and editor formats for use on Now Now, LLC client websites.
 
 == Installation ==
 
@@ -30,7 +30,7 @@ Installing "WP Admin Dash" can be done via github.
 
 = What is the plugin template for? =
 
-This plugin is for Now Now, LLC developement and client use only.
+This plugin is designed for Now Now developement and client use only.
 
 == Changelog ==
 
