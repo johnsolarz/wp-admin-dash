@@ -1,0 +1,9 @@
+body.login {
+  background: #f0f0f0;
+}
+.login h1 a {
+  background-image: url("../img/login.png");
+  background-size: 320px 220px;
+  width: 320px;
+  height: 220px;
+}
