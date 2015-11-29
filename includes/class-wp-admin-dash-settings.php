@@ -67,7 +67,7 @@ class WP_Admin_Dash_Settings {
 	 * @return void
 	 */
 	public function add_menu_item () {
-		$page = add_options_page( __( 'Plugin Settings', 'wp-admin-dash' ) , __( 'Plugin Settings', 'wp-admin-dash' ) , 'manage_options' , $this->parent->_token . '_settings' ,  array( $this, 'settings_page' ) );
+		$page = add_options_page( __( 'Custom', 'wp-admin-dash' ) , __( 'Custom', 'wp-admin-dash' ) , 'manage_options' , $this->parent->_token . '_settings' ,  array( $this, 'settings_page' ) );
 		add_action( 'admin_print_styles-' . $page, array( $this, 'settings_assets' ) );
 	}
 
@@ -107,111 +107,322 @@ class WP_Admin_Dash_Settings {
 	 */
 	private function settings_fields () {
 
-		$settings['standard'] = array(
-			'title'					=> __( 'Standard', 'wp-admin-dash' ),
-			'description'			=> __( 'These are fairly standard form input fields.', 'wp-admin-dash' ),
+		$settings['post-types'] = array(
+			'title'					=> __( 'Post Types', 'wp-admin-dash' ),
+			'description'			=> __( 'Register custom WordPress post types.', 'wp-admin-dash' ),
 			'fields'				=> array(
 				array(
-					'id' 			=> 'text_field',
-					'label'			=> __( 'Some Text' , 'wp-admin-dash' ),
-					'description'	=> __( 'This is a standard text field.', 'wp-admin-dash' ),
+					'id' 			=> 'cpt_1_post_type',
+					'label'			=> __( 'Post Type' , 'wp-admin-dash' ),
+					'description'	=> __( 'Lowercase, required.', 'wp-admin-dash' ),
 					'type'			=> 'text',
 					'default'		=> '',
-					'placeholder'	=> __( 'Placeholder text', 'wp-admin-dash' )
+					'placeholder'	=> __( 'post', 'wp-admin-dash' )
 				),
 				array(
-					'id' 			=> 'password_field',
-					'label'			=> __( 'A Password' , 'wp-admin-dash' ),
-					'description'	=> __( 'This is a standard password field.', 'wp-admin-dash' ),
-					'type'			=> 'password',
+					'id' 			=> 'cpt_1_plural_name',
+					'label'			=> __( 'Plural Name' , 'wp-admin-dash' ),
+					'description'	=> __( 'Required.', 'wp-admin-dash' ),
+					'type'			=> 'text',
 					'default'		=> '',
-					'placeholder'	=> __( 'Placeholder text', 'wp-admin-dash' )
+					'placeholder'	=> __( 'Posts', 'wp-admin-dash' )
 				),
 				array(
-					'id' 			=> 'secret_text_field',
-					'label'			=> __( 'Some Secret Text' , 'wp-admin-dash' ),
-					'description'	=> __( 'This is a secret text field - any data saved here will not be displayed after the page has reloaded, but it will be saved.', 'wp-admin-dash' ),
-					'type'			=> 'text_secret',
+					'id' 			=> 'cpt_1_singular_name',
+					'label'			=> __( 'Singular Name' , 'wp-admin-dash' ),
+					'description'	=> __( 'Required.', 'wp-admin-dash' ),
+					'type'			=> 'text',
 					'default'		=> '',
-					'placeholder'	=> __( 'Placeholder text', 'wp-admin-dash' )
+					'placeholder'	=> __( 'Post', 'wp-admin-dash' )
 				),
 				array(
-					'id' 			=> 'text_block',
-					'label'			=> __( 'A Text Block' , 'wp-admin-dash' ),
-					'description'	=> __( 'This is a standard text area.', 'wp-admin-dash' ),
+					'id' 			=> 'cpt_1_description',
+					'label'			=> __( 'Description' , 'wp-admin-dash' ),
+					'description'	=> '',
 					'type'			=> 'textarea',
 					'default'		=> '',
-					'placeholder'	=> __( 'Placeholder text for this textarea', 'wp-admin-dash' )
+					'placeholder'	=> __( 'Optional', 'wp-admin-dash' )
 				),
 				array(
-					'id' 			=> 'single_checkbox',
-					'label'			=> __( 'An Option', 'wp-admin-dash' ),
-					'description'	=> __( 'A standard checkbox - if you save this option as checked then it will store the option as \'on\', otherwise it will be an empty string.', 'wp-admin-dash' ),
-					'type'			=> 'checkbox',
-					'default'		=> ''
+					'id' => 'cpt_2_hr',
+					'label' => '',
+					'description' => '',
+					'type' => 'hr',
+					'default' => '',
+					'placeholder' => ''
 				),
 				array(
-					'id' 			=> 'select_box',
-					'label'			=> __( 'A Select Box', 'wp-admin-dash' ),
-					'description'	=> __( 'A standard select box.', 'wp-admin-dash' ),
-					'type'			=> 'select',
-					'options'		=> array( 'drupal' => 'Drupal', 'joomla' => 'Joomla', 'wordpress' => 'WordPress' ),
-					'default'		=> 'wordpress'
+					'id' 			=> 'cpt_2_post_type',
+					'label'			=> __( 'Post Type' , 'wp-admin-dash' ),
+					'description'	=> __( 'Lowercase, required.', 'wp-admin-dash' ),
+					'type'			=> 'text',
+					'default'		=> '',
+					'placeholder'	=> __( 'post', 'wp-admin-dash' )
 				),
 				array(
-					'id' 			=> 'radio_buttons',
-					'label'			=> __( 'Some Options', 'wp-admin-dash' ),
-					'description'	=> __( 'A standard set of radio buttons.', 'wp-admin-dash' ),
-					'type'			=> 'radio',
-					'options'		=> array( 'superman' => 'Superman', 'batman' => 'Batman', 'ironman' => 'Iron Man' ),
-					'default'		=> 'batman'
+					'id' 			=> 'cpt_2_plural_name',
+					'label'			=> __( 'Name' , 'wp-admin-dash' ),
+					'description'	=> __( 'Required.', 'wp-admin-dash' ),
+					'type'			=> 'text',
+					'default'		=> '',
+					'placeholder'	=> __( 'Posts', 'wp-admin-dash' )
 				),
 				array(
-					'id' 			=> 'multiple_checkboxes',
-					'label'			=> __( 'Some Items', 'wp-admin-dash' ),
-					'description'	=> __( 'You can select multiple items and they will be stored as an array.', 'wp-admin-dash' ),
-					'type'			=> 'checkbox_multi',
-					'options'		=> array( 'square' => 'Square', 'circle' => 'Circle', 'rectangle' => 'Rectangle', 'triangle' => 'Triangle' ),
-					'default'		=> array( 'circle', 'triangle' )
-				)
-			)
-		);
+					'id' 			=> 'cpt_2_singular_name',
+					'label'			=> __( 'Singular Name' , 'wp-admin-dash' ),
+					'description'	=> __( 'Required.', 'wp-admin-dash' ),
+					'type'			=> 'text',
+					'default'		=> '',
+					'placeholder'	=> __( 'Post', 'wp-admin-dash' )
+				),
+				array(
+					'id' 			=> 'cpt_2_description',
+					'label'			=> __( 'Description' , 'wp-admin-dash' ),
+					'description'	=> '',
+					'type'			=> 'textarea',
+					'default'		=> '',
+					'placeholder'	=> __( 'Optional', 'wp-admin-dash' )
+				),
+				/* Uncomment for more post types
 
-		$settings['extra'] = array(
-			'title'					=> __( 'Extra', 'wp-admin-dash' ),
-			'description'			=> __( 'These are some extra input fields that maybe aren\'t as common as the others.', 'wp-admin-dash' ),
+				 array(
+					'id' => 'cpt_3_hr',
+					'label' => '',
+					'description' => '',
+					'type' => 'hr',
+					'default' => '',
+					'placeholder' => ''
+				),
+				array(
+					'id' 			=> 'cpt_3_post_type',
+					'label'			=> __( 'Post Type' , 'wp-admin-dash' ),
+					'description'	=> __( 'Lowercase, required.', 'wp-admin-dash' ),
+					'type'			=> 'text',
+					'default'		=> '',
+					'placeholder'	=> __( 'post', 'wp-admin-dash' )
+				),
+				array(
+					'id' 			=> 'cpt_3_plural_name',
+					'label'			=> __( 'Name' , 'wp-admin-dash' ),
+					'description'	=> __( 'Required.', 'wp-admin-dash' ),
+					'type'			=> 'text',
+					'default'		=> '',
+					'placeholder'	=> __( 'Posts', 'wp-admin-dash' )
+				),
+				array(
+					'id' 			=> 'cpt_3_singular_name',
+					'label'			=> __( 'Singular Name' , 'wp-admin-dash' ),
+					'description'	=> __( 'Required.', 'wp-admin-dash' ),
+					'type'			=> 'text',
+					'default'		=> '',
+					'placeholder'	=> __( 'Post', 'wp-admin-dash' )
+				),
+				array(
+					'id' 			=> 'cpt_3_description',
+					'label'			=> __( 'Description' , 'wp-admin-dash' ),
+					'description'	=> '',
+					'type'			=> 'textarea',
+					'default'		=> '',
+					'placeholder'	=> __( 'Optional', 'wp-admin-dash' )
+				),
+				array(
+					'id' => 'cpt_4_hr',
+					'label' => '',
+					'description' => '',
+					'type' => 'hr',
+					'default' => '',
+					'placeholder' => ''
+				),
+				array(
+					'id' 			=> 'cpt_4_post_type',
+					'label'			=> __( 'Post Type' , 'wp-admin-dash' ),
+					'description'	=> __( 'Lowercase, required.', 'wp-admin-dash' ),
+					'type'			=> 'text',
+					'default'		=> '',
+					'placeholder'	=> __( 'post', 'wp-admin-dash' )
+				),
+				array(
+					'id' 			=> 'cpt_4_plural_name',
+					'label'			=> __( 'Name' , 'wp-admin-dash' ),
+					'description'	=> __( 'Required.', 'wp-admin-dash' ),
+					'type'			=> 'text',
+					'default'		=> '',
+					'placeholder'	=> __( 'Posts', 'wp-admin-dash' )
+				),
+				array(
+					'id' 			=> 'cpt_4_singular_name',
+					'label'			=> __( 'Singular Name' , 'wp-admin-dash' ),
+					'description'	=> __( 'Required.', 'wp-admin-dash' ),
+					'type'			=> 'text',
+					'default'		=> '',
+					'placeholder'	=> __( 'Post', 'wp-admin-dash' )
+				),
+				array(
+					'id' 			=> 'cpt_4_description',
+					'label'			=> __( 'Description' , 'wp-admin-dash' ),
+					'description'	=> '',
+					'type'			=> 'textarea',
+					'default'		=> '',
+					'placeholder'	=> __( 'Optional', 'wp-admin-dash' )
+				),*/
+			),
+		);
+		$settings['taxonomies'] = array(
+			'title'					=> __( 'Taxonomies', 'wp-admin-dash' ),
+			'description'			=> __( 'Register custom WordPress taxonomies.', 'wp-admin-dash' ),
 			'fields'				=> array(
 				array(
-					'id' 			=> 'number_field',
-					'label'			=> __( 'A Number' , 'wp-admin-dash' ),
-					'description'	=> __( 'This is a standard number field - if this field contains anything other than numbers then the form will not be submitted.', 'wp-admin-dash' ),
-					'type'			=> 'number',
+					'id' 			=> 'tax_1_taxonomy',
+					'label'			=> __( 'Taxonomy' , 'wp-admin-dash' ),
+					'description'	=> __( 'Lowercase, required.', 'wp-admin-dash' ),
+					'type'			=> 'text',
 					'default'		=> '',
-					'placeholder'	=> __( '42', 'wp-admin-dash' )
+					'placeholder'	=> __( 'category', 'wp-admin-dash' )
 				),
 				array(
-					'id' 			=> 'colour_picker',
-					'label'			=> __( 'Pick a colour', 'wp-admin-dash' ),
-					'description'	=> __( 'This uses WordPress\' built-in colour picker - the option is stored as the colour\'s hex code.', 'wp-admin-dash' ),
-					'type'			=> 'color',
-					'default'		=> '#21759B'
-				),
-				array(
-					'id' 			=> 'an_image',
-					'label'			=> __( 'An Image' , 'wp-admin-dash' ),
-					'description'	=> __( 'This will upload an image to your media library and store the attachment ID in the option field. Once you have uploaded an imge the thumbnail will display above these buttons.', 'wp-admin-dash' ),
-					'type'			=> 'image',
+					'id' 			=> 'tax_1_plural_name',
+					'label'			=> __( 'Plural Name' , 'wp-admin-dash' ),
+					'description'	=> __( '	Required.', 'wp-admin-dash' ),
+					'type'			=> 'text',
 					'default'		=> '',
-					'placeholder'	=> ''
+					'placeholder'	=> __( 'Categories', 'wp-admin-dash' )
 				),
 				array(
-					'id' 			=> 'multi_select_box',
-					'label'			=> __( 'A Multi-Select Box', 'wp-admin-dash' ),
-					'description'	=> __( 'A standard multi-select box - the saved data is stored as an array.', 'wp-admin-dash' ),
-					'type'			=> 'select_multi',
-					'options'		=> array( 'linux' => 'Linux', 'mac' => 'Mac', 'windows' => 'Windows' ),
-					'default'		=> array( 'linux' )
-				)
+					'id' 			=> 'tax_1_singular_name',
+					'label'			=> __( 'Singular Name' , 'wp-admin-dash' ),
+					'description'	=> __( 'Required.', 'wp-admin-dash' ),
+					'type'			=> 'text',
+					'default'		=> '',
+					'placeholder'	=> __( 'Cateogry', 'wp-admin-dash' )
+				),
+				array(
+					'id' 			=> 'tax_1_post_type',
+					'label'			=> __( 'Post Type' , 'wp-admin-dash' ),
+					'description'	=> __('Associated post type, required.'),
+					'type'			=> 'text',
+					'default'		=> '',
+					'placeholder'	=> __( 'post', 'wp-admin-dash' )
+				),
+				array(
+					'id' => 'tax_2_hr',
+					'label' => '',
+					'description' => '',
+					'type' => 'hr',
+					'default' => '',
+					'placeholder' => ''
+				),
+				array(
+					'id' 			=> 'tax_2_taxonomy',
+					'label'			=> __( 'Taxonomy' , 'wp-admin-dash' ),
+					'description'	=> __( 'Lowercase, required.', 'wp-admin-dash' ),
+					'type'			=> 'text',
+					'default'		=> '',
+					'placeholder'	=> __( 'category', 'wp-admin-dash' )
+				),
+				array(
+					'id' 			=> 'tax_2_plural_name',
+					'label'			=> __( 'Plural Name' , 'wp-admin-dash' ),
+					'description'	=> __( 'Required.', 'wp-admin-dash' ),
+					'type'			=> 'text',
+					'default'		=> '',
+					'placeholder'	=> __( 'Categories', 'wp-admin-dash' )
+				),
+				array(
+					'id' 			=> 'tax_2_singular_name',
+					'label'			=> __( 'Singular Name' , 'wp-admin-dash' ),
+					'description'	=> __( 'Required.', 'wp-admin-dash' ),
+					'type'			=> 'text',
+					'default'		=> '',
+					'placeholder'	=> __( 'Cateogry', 'wp-admin-dash' )
+				),
+				array(
+					'id' 			=> 'tax_2_post_type',
+					'label'			=> __( 'Post Type' , 'wp-admin-dash' ),
+					'description'	=> __('Associated post type, required.'),
+					'type'			=> 'text',
+					'default'		=> '',
+					'placeholder'	=> __( 'post', 'wp-admin-dash' )
+				),
+				array(
+					'id' => 'tax_3_hr',
+					'label' => '',
+					'description' => '',
+					'type' => 'hr',
+					'default' => '',
+					'placeholder' => ''
+				),
+				array(
+					'id' 			=> 'tax_3_taxonomy',
+					'label'			=> __( 'Taxonomy' , 'wp-admin-dash' ),
+					'description'	=> __( 'Lowercase, required.', 'wp-admin-dash' ),
+					'type'			=> 'text',
+					'default'		=> '',
+					'placeholder'	=> __( 'category', 'wp-admin-dash' )
+				),
+				array(
+					'id' 			=> 'tax_3_plural_name',
+					'label'			=> __( 'Plural Name' , 'wp-admin-dash' ),
+					'description'	=> __( 'Required.', 'wp-admin-dash' ),
+					'type'			=> 'text',
+					'default'		=> '',
+					'placeholder'	=> __( 'Categories', 'wp-admin-dash' )
+				),
+				array(
+					'id' 			=> 'tax_3_singular_name',
+					'label'			=> __( 'Singular Name' , 'wp-admin-dash' ),
+					'description'	=> __( 'Required.', 'wp-admin-dash' ),
+					'type'			=> 'text',
+					'default'		=> '',
+					'placeholder'	=> __( 'Cateogry', 'wp-admin-dash' )
+				),
+				array(
+					'id' 			=> 'tax_3_post_type',
+					'label'			=> __( 'Post Type' , 'wp-admin-dash' ),
+					'description'	=> __('Associated post type, required.'),
+					'type'			=> 'text',
+					'default'		=> '',
+					'placeholder'	=> __( 'post', 'wp-admin-dash' )
+				),
+				array(
+					'id' => 'tax_4_hr',
+					'label' => '',
+					'description' => '',
+					'type' => 'hr',
+					'default' => '',
+					'placeholder' => ''
+				),
+				array(
+					'id' 			=> 'tax_4_taxonomy',
+					'label'			=> __( 'Taxonomy' , 'wp-admin-dash' ),
+					'description'	=> __( 'Lowercase, required.', 'wp-admin-dash' ),
+					'type'			=> 'text',
+					'default'		=> '',
+					'placeholder'	=> __( 'category', 'wp-admin-dash' )
+				),
+				array(
+					'id' 			=> 'tax_4_plural_name',
+					'label'			=> __( 'Plural Name' , 'wp-admin-dash' ),
+					'description'	=> __( 'Required.', 'wp-admin-dash' ),
+					'type'			=> 'text',
+					'default'		=> '',
+					'placeholder'	=> __( 'Categories', 'wp-admin-dash' )
+				),
+				array(
+					'id' 			=> 'tax_4_singular_name',
+					'label'			=> __( 'Singular Name' , 'wp-admin-dash' ),
+					'description'	=> __( 'Required.', 'wp-admin-dash' ),
+					'type'			=> 'text',
+					'default'		=> '',
+					'placeholder'	=> __( 'Cateogry', 'wp-admin-dash' )
+				),
+				array(
+					'id' 			=> 'tax_4_post_type',
+					'label'			=> __( 'Post Type' , 'wp-admin-dash' ),
+					'description'	=> __('Associated post type, required.'),
+					'type'			=> 'text',
+					'default'		=> '',
+					'placeholder'	=> __( 'post', 'wp-admin-dash' )
+				),
 			)
 		);
 
@@ -278,7 +489,7 @@ class WP_Admin_Dash_Settings {
 
 		// Build page HTML
 		$html = '<div class="wrap" id="' . $this->parent->_token . '_settings">' . "\n";
-			$html .= '<h2>' . __( 'Plugin Settings' , 'wp-admin-dash' ) . '</h2>' . "\n";
+			$html .= '<h2>' . __( 'Custom Settings' , 'wp-admin-dash' ) . '</h2>' . "\n";
 
 			$tab = '';
 			if ( isset( $_GET['tab'] ) && $_GET['tab'] ) {
